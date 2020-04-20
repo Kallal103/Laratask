@@ -15,32 +15,8 @@ class Task extends Model
     protected $casts = [
         'completed' => 'boolean'
     ];
-     /**
-     * Boot the model.
-     */
-    protected static function boot()
-    {
-        parent::boot();
 
-        static::created(function ($task) {
-            $task->project->recordActivity('created_task');
-            // Activity::create([
-            //     'project_id' => $task->project->id,
-            //     'description' => 'created_task'
-            // ]);
-        });      
-        
-        // static::updated(function ($task) {
-        //     if(! $task->completed) return;
-
-            
-
-        //     // Activity::create([
-        //     //     'project_id' => $task->project->id,
-        //     //     'description' => 'completed_task'
-        //     // ]);
-        // });
-    }
+    
 
     public function complete()
     {
@@ -52,7 +28,7 @@ class Task extends Model
     {
         $this->update(['completed'=> false]);
 
-        $this->project->recordActivity('completed_task');
+        $this->project->recordActivity('incompleted_task');
     }
 
     public function project(){

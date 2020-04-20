@@ -26,10 +26,7 @@ class ProjectTasksController extends Controller
       $attributes = request()->validate(['body'=> 'required']);
 
       $task->update($attributes);
-
-      $method = request('completed') ? 'complete' : 'incomplete';
-
-      $task->$method();
+       request('completed') ? $task->complete() : $task->incomplete();
 
       // if( request('completed')){
       //   $task->complete();
@@ -42,6 +39,9 @@ class ProjectTasksController extends Controller
       // ]);
 
       return redirect($project->path());
+
+      //git test
+      
 
     }
 }
